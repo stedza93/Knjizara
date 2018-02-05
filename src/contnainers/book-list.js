@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import {selectBook} from "../actions/index";
+import {bindActionCreators} from "redux";
 class Booklist extends Component {
   renderList() {
     return this.props.books.map(book => {
       return (
-        <li key={book.title} className="list-group-item">
+        <li 
+        key={book.title} 
+        onClick={()=> this.props.selectBook(book)}
+        className="list-group-item">
           {" "}
           {book.title}
         </li>
@@ -17,10 +21,15 @@ class Booklist extends Component {
     return <ul className="list-group col-sm-4">{this.renderList()}</ul>;
   }
 }
-function mapStateToProps(state){
-  return{
+function mapStateToProps(state) {
+  return {
+    //sta je to sadasdas
     books: state.books
   };
 }
+function mapDispatchToProps(dispatch){
+//whenever selectedBook is called result should be passed to all reducers
 
-export default connect(mapStateToProps)(Booklist);
+return bindActionCreators({selectBook: selectBook},dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Booklist);
