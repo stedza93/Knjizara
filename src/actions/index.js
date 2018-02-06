@@ -12,3 +12,10 @@ export function hoverBook(book) {
     payload: book
   };
 }
+export function writerBook(book) {
+  console.log(book);
+  return {
+    type: "WRITER_BOOK",
+    payload: book
+  };
+}

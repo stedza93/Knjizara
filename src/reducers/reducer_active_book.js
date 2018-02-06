@@ -5,4 +5,5 @@ export default function(state = null, action) {
   }
 
   return state;
+  console.log(state);
 }

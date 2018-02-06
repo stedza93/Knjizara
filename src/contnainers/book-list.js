@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectBook, hoverBook } from "../actions/index";
+import { selectBook, hoverBook, writerBook } from "../actions/index";
 import { bindActionCreators } from "redux";
 class Booklist extends Component {
   renderList() {
@@ -9,7 +9,7 @@ class Booklist extends Component {
         <li
           key={book.title}
           onClick={() => this.props.selectBook(book)}
-          onMouseEnter={() => this.props.hoverBook(book)}
+          onMouseEnter={() => this.props.writerBook(book.writerName)}
           className="list-group-item"
         >
           {" "}
@@ -31,7 +31,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   //whenever selectedBook is called result should be passed to all reducers
-  console.log('dispatch = ' + dispatch);
-  return bindActionCreators({ selectBook: selectBook, hoverBook: hoverBook }, dispatch);
+  console.log("dispatch = " + dispatch);
+  return bindActionCreators(
+    { selectBook: selectBook, hoverBook: hoverBook, writerBook: writerBook },
+    dispatch
+  );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Booklist);
